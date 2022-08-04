@@ -29,7 +29,6 @@ public class Startup
 		services.AddMvc(options => options.EnableEndpointRouting = false);
 	}
 
-	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 	{
 		if(env.IsDevelopment())
@@ -42,8 +41,30 @@ public class Startup
 		app.UseMvc(routes =>
 		{
 			routes.MapRoute(
-				name: "default",
+				name: null,
+				template: "{category}/Page{productPage:int}",
+				defaults: new { Controller = "Product", action = "List" });
+
+			routes.MapRoute(
+				name: null,
+				template: "Page{productPage:int}",
+				defaults: new { Controller = "Product", action = "List", productPage = 1 });
+
+			routes.MapRoute(
+				name: null,
+				template: "{category}",
+				defaults: new { Controller = "Product", action = "List", productPage = 1 });
+
+			routes.MapRoute(
+				name: null,
+				template: "",
+				defaults: new { Controller = "Product", action = "List", productPage = 1 });
+
+			routes.MapRoute(
+				name: null,
 				template: "{controller=Product}/{action=List}/{id?}");
 		});
+
+		SeedData.EnsurePopulated(app);
 	}
 }

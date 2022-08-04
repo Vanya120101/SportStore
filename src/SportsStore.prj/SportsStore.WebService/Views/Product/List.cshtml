@@ -1,10 +1,12 @@
-﻿@model IEnumerable<Product>
+﻿@using SportsStore.WebService.Models.ViewModels
+@using SportsStore.WebService.Infrastructure
+@model ProductsListViewModel
 
-@foreach(var product in Model)
+@foreach(var product in Model.Products)
 {
-    <div>
-        <h3>@product.Name</h3>
-        @product.Description
-        <h4>@product.Price.ToString("c")</h4>
-    </div>
+    @Html.Partial("ProductSummary", product)
 }
+<div page-model paging-info="@Model.PagingInfo" category="@Model.CurrentCaterogy" page-action="List"
+page-classes-enabled="true" page-class="btn" page-class-normal="btn-secondary"
+page-class-selected="btn-primary" class="btn-group pull-right m-1">
+</div>

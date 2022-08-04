@@ -5,5 +5,12 @@ namespace SportsStore.WebService.Database;
 
 public class EFProductRepository : IProductRepository
 {
-	public IQueryable<Product> Products => throw new System.NotImplementedException();
+	private readonly ApplicationDbContext _context;
+
+	public EFProductRepository(ApplicationDbContext context)
+	{
+		_context = context;
+	}
+
+	public IQueryable<Product> Products => _context.Products;
 }

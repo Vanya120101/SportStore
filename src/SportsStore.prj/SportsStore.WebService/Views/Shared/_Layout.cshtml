@@ -1,13 +1,28 @@
 ﻿<!DOCTYPE html>
 
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width"/>
-        <title>SportsStore</title>
-    </head>
-    <body>
-        <div>
-            @RenderBody()
-        </div>
-    </body>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/mainStyle.css" rel="stylesheet" />
+    <title>SportsStore</title>
+</head>
+<body>
+     <header>
+        <h1>SPORTS STORE</h1>
+        <ul class="nav">
+            <li><a href="#">ДОБАВИТЬ ТОВАР</a></li>
+            <li><a href="#">УДАЛИТЬ ТОВАР</a></li>
+            <li><a href="#">СПИСОК ТОВАРА</a></li>
+            <li><a href="#">ВХОД ВЫХОД</a></li>
+        </ul>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        <h1>Данный проект - проект по книжке asp net core Фриманова, "</h1>J
+    </footer>
+</body>
 </html>
