@@ -53,7 +53,6 @@ header {
 
     .nav a {
         display: block;
-        color: black;
         padding: 10px 25px;
         text-decoration: none;
         border-right: 1px solid #ccc;
@@ -74,10 +73,23 @@ header {
         clear: both;
     }
 
-main {
+.leftMenu{
+    float:left;
+    margin-left:2%;
+    margin-right: 2%;
+    margin-bottom: 5%;
+}
+
+.leftMenu a{
+    font-size: 24px;
+    display: block;
+    margin:  3% 0%;
+}
+
+.content {
     background-color: #f7f7f7;
     margin-bottom: 5%;
-    margin-left: 10%;
+    margin-left: 20%;
     margin-right: 10%;
     margin-top: 1%;
 }

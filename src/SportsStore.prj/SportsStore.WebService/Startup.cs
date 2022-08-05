@@ -27,6 +27,8 @@ public class Startup
 			_configuration["Data:SportsStoreProducts:ConnectionString"]));
 		services.AddTransient<IProductRepository, EFProductRepository>();
 		services.AddMvc(options => options.EnableEndpointRouting = false);
+		services.AddMemoryCache();
+		services.AddSession();
 	}
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,6 +38,7 @@ public class Startup
 			app.UseDeveloperExceptionPage();
 		}
 
+		app.UseSession();
 		app.UseStatusCodePages();
 		app.UseStaticFiles();
 		app.UseMvc(routes =>

@@ -29,7 +29,10 @@ public class ProductController : Controller
 			{
 				CurrentPage  = productPage,
 				ItemsPerPage = PageSize,
-				TotalItems   = _productRepository.Products.Count()
+				//TotalItems   = _productRepository.Products.Count()
+				TotalItems   = category == null ?
+					_productRepository.Products.Count() :
+					_productRepository.Products.Where(p=>p.Category == category).Count()
 			},
 			Products        = products,
 			CurrentCaterogy = category

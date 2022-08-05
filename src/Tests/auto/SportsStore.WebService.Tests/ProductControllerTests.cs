@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.AspNetCore.Mvc;
+using Moq;
 using NUnit.Framework;
 using SportsStore.WebService.Controllers;
 using SportsStore.WebService.Database;
@@ -67,6 +68,24 @@ internal class ProductControllerTests
 		Assert.That(products.Count, Is.EqualTo(2));
 		Assert.That(products[0].Name, Is.EqualTo("P3"));
 		Assert.That(products[1].Name, Is.EqualTo("P5"));
+	}
+
+	[Test]
+	public void Generate_Category_Specific_Product_Count()
+	{
+		//Act
+		Func<ViewResult, ProductsListViewModel> getModel = result => result?.ViewData?.Model as ProductsListViewModel;
+
+		var res1   = getModel(_controller.List("Cat1"))?.PagingInfo.TotalItems;
+		var res2   = getModel(_controller.List("Cat2"))?.PagingInfo.TotalItems;
+		var res3   = getModel(_controller.List("Cat3"))?.PagingInfo.TotalItems;
+		var resAll = getModel(_controller.List(null))?.PagingInfo.TotalItems;
+
+		//Assert
+		Assert.That(res1, Is.EqualTo(3));
+		Assert.That(res2, Is.EqualTo(2));
+		Assert.That(res3, Is.EqualTo(1));
+		Assert.That(resAll, Is.EqualTo(6));
 	}
 
 	private IQueryable<Product> GetProducts()

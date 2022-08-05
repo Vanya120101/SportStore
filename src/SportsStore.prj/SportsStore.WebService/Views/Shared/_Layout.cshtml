@@ -9,17 +9,22 @@
     <title>SportsStore</title>
 </head>
 <body>
-     <header>
+    <header>
         <h1>SPORTS STORE</h1>
         <ul class="nav">
-            <li><a href="#">ДОБАВИТЬ ТОВАР</a></li>
-            <li><a href="#">УДАЛИТЬ ТОВАР</a></li>
-            <li><a href="#">СПИСОК ТОВАРА</a></li>
-            <li><a href="#">ВХОД ВЫХОД</a></li>
+            <li><a class="btn btn-block btn-secondary" href="#">ДОБАВИТЬ ТОВАР</a></li>
+            <li><a class="btn btn-block btn-secondary" href="#">УДАЛИТЬ ТОВАР</a></li>
+            <li><a class="btn btn-block btn-secondary" href="#">СПИСОК ТОВАРА</a></li>
+            <li><a class="btn btn-block btn-secondary" href="#">ВХОД ВЫХОД</a></li>
         </ul>
     </header>
     <main>
-        @RenderBody()
+        <div class="leftMenu">
+            @await Component.InvokeAsync("NavigationMenu")
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
     </main>
     <footer>
         <h1>Данный проект - проект по книжке asp net core Фриманова, "</h1>J

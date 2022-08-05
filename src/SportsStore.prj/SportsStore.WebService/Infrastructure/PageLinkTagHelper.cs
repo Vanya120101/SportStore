@@ -20,8 +20,6 @@ public class PageLinkTagHelper : TagHelper
 	public string Category { get; set; }
 	public string PageAction { get; set; }
 
-	//[HtmlAttributeName(DictionaryAttributePrefix ="page-url")]
-	//public Dictionary<string, object> PageUrlValues { get; set; } = new ();
 	public bool PageClassesEnabled { get; set; } = false;
 	public string PageClass { get; set; }
 	public string PageClassNormal { get; set; }
@@ -39,14 +37,13 @@ public class PageLinkTagHelper : TagHelper
 		for(var i = 1; i <= PagingInfo.TotalPages; i++)
 		{
 			var tag = new TagBuilder("a");
-			//PageUrlValues["productPage"] = i;
 			tag.Attributes["href"] = urlHelper.Action(new UrlActionContext() { Action = PageAction, Values = new { productPage = i, category = Category } });
-			//tag.Attributes["href"] = urlHelper.Action(new UrlActionContext() { Action = PageAction, Values = PageUrlValues });
 			if(PageClassesEnabled)
 			{
 				tag.AddCssClass(PageClass);
 				tag.AddCssClass(i == PagingInfo.CurrentPage ? PageClassSelected : PageClassNormal);
 			}
+
 			tag.InnerHtml.Append(i.ToString());
 			result.InnerHtml.AppendHtml(tag);
 		}

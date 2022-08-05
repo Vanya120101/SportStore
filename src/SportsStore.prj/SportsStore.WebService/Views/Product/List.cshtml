@@ -4,7 +4,7 @@
 
 @foreach(var product in Model.Products)
 {
-    @Html.Partial("ProductSummary", product)
+    @await Html.PartialAsync("ProductSummary", product)
 }
 <div page-model paging-info="@Model.PagingInfo" category="@Model.CurrentCaterogy" page-action="List"
 page-classes-enabled="true" page-class="btn" page-class-normal="btn-secondary"
