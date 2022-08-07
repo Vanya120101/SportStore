@@ -1,10 +1,17 @@
-﻿namespace SportsStore.WebService.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SportsStore.WebService.Models;
 
 public class Product
 {
 	public int Id { get; init; }
-	public string Name { get; init; }
-	public string Description { get; init; }
-	public decimal Price { get; init; }
-	public string Category { get; init; }
+	[Required(ErrorMessage ="Please enter a product name")]
+	public string Name { get; set; }
+	[Required(ErrorMessage = "Please enter a description")]
+	public string Description { get; set; }
+	[Required]
+	[Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
+	public decimal Price { get; set; }
+	[Required(ErrorMessage = "Please enter a category")]
+	public string Category { get; set; }
 }

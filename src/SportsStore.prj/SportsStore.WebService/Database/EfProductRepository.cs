@@ -13,4 +13,37 @@ public class EFProductRepository : IProductRepository
 	}
 
 	public IQueryable<Product> Products => _context.Products;
+
+	public Product DeleteProduct(int productId)
+	{
+		var dbEntry = _context.Products.FirstOrDefault(p => p.Id == productId);
+		if(dbEntry != null)
+		{
+			_context.Products.Remove(dbEntry);
+			_context.SaveChanges();
+		}
+
+		return dbEntry;
+	}
+
+	public void SaveProduct(Product product)
+	{
+		if(product.Id == 0)
+		{
+			_context.Products.Add(product);
+		}
+		else
+		{
+			var dbEntry = _context.Products.FirstOrDefault(p => p.Id == product.Id);
+			if(dbEntry != null)
+			{
+				dbEntry.Name = product.Name;
+				dbEntry.Price = product.Price;
+				dbEntry.Description = product.Description;
+				dbEntry.Category = product.Category;
+			}
+		}
+
+		_context.SaveChanges();
+	}
 }

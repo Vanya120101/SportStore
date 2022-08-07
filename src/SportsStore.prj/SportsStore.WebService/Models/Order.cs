@@ -12,6 +12,9 @@ public class Order
 	[BindNever]
 	public ICollection<CartLine> Lines { get; set; }
 
+	[BindNever]
+	public bool Shipped { get; set; }
+
 	[Required(ErrorMessage = "Please enter a name")]
 	public string Name { get; init; }
 
@@ -34,4 +37,6 @@ public class Order
 	public string Country { get; init; }
 
 	public bool GiftWrap { get; init; }
+
+	
 }

@@ -14,10 +14,7 @@ public class OrderController : Controller
 		_orderRepository = orderRepository ?? throw new System.ArgumentNullException(nameof(orderRepository));
 		_cart = cart ?? throw new System.ArgumentNullException(nameof(cart));
 	}
-	public IActionResult Checkout()
-	{
-		return View(new Order());
-	}
+	public IActionResult Checkout() => View(new Order());
 
 	[HttpPost]
 	public IActionResult Checkout(Order order)
@@ -37,9 +34,29 @@ public class OrderController : Controller
 		return RedirectToAction(nameof(Completed));
 	}
 
+	public ViewResult List()
+	{
+		var orders = _orderRepository.Orders.Where(o => o.Shipped == false);
+		return View(orders);
+	}
+
+	[HttpPost]
+	public IActionResult MarkShipped(int orderId)
+	{
+		var order = _orderRepository.Orders.FirstOrDefault(o => o.Id == orderId);
+
+		if(order != null)
+		{
+			order.Shipped = true;
+			_orderRepository.SaveOrder(order);
+		}
+
+		return RedirectToAction(nameof(List));
+	}
+
 	public ViewResult Completed()
-    {
+	{
 		_cart.Clear();
 		return View();
-    }
+	}
 }

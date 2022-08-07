@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        .input-validation-error{
+            border-color: red;
+            background-color: #fee;
+        }
+    </style>
+    <title>@ViewBag.Title</title>
+</head>
+<body class="m-1 p-1">
+    <div>
+        <h4>@ViewBag.Title</h4>
+        @if(TempData["message"] != null)
+        {
+            <div class="alert alert-success">@TempData["message"]</div>
+        }
+        @RenderBody()
+    </div>
+</body>
+</html>

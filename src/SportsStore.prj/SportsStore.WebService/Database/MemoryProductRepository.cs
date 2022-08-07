@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SportsStore.WebService.Database;
 
-public class FakeProductRepository : IProductRepository
+public class FakeProductRepository
 {
 	public IQueryable<Product> Products => new List<Product>
 	{
@@ -13,5 +13,5 @@ public class FakeProductRepository : IProductRepository
 		new Product{Name = "Running shoes", Price=95}
 	}.AsQueryable();
 
-
+	public void SaveProduct(Product product) => throw new System.NotImplementedException();
 }
