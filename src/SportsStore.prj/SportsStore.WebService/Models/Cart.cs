@@ -21,13 +21,13 @@ public class Cart
 
 			_cartLine.Add(cartLine);
 		}
-        else
-        {
+		else
+		{
 			line.Quantity += quantity;
-        }
+		}
 	}
 
-    public virtual void RemoveLine(Product product) => _cartLine.RemoveAll(l => l.Product.Id == product.Id);
+	public virtual void RemoveLine(Product product) => _cartLine.RemoveAll(l => l.Product.Id == product.Id);
 
 	public virtual decimal ComputeTotalValue() => _cartLine.Sum(l => l.Quantity * l.Product.Price);
 

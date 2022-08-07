@@ -1,0 +1,19 @@
+﻿@model Cart
+
+<div class="">
+
+    <a class="btn btn-block btn-secondary" asp-controller="Cart"
+       asp-action="Index" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <div>
+            @if(Model.Lines.Count() > 0)
+            {
+                <div style="font-size: 22px;">
+                    <b>Your cart:</b>
+                    @Model.Lines.Sum(x=>x.Quantity) item(s)
+                    @Model.ComputeTotalValue().ToString("c")
+                </div>
+            }
+            Cart
+        </div>
+    </a>
+</div>

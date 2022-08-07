@@ -6,16 +6,21 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="~/css/mainStyle.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/*.css" rel="stylesheet" />
     <title>SportsStore</title>
 </head>
 <body>
     <header>
         <h1>SPORTS STORE</h1>
         <ul class="nav">
-            <li><a class="btn btn-block btn-secondary" href="#">ДОБАВИТЬ ТОВАР</a></li>
-            <li><a class="btn btn-block btn-secondary" href="#">УДАЛИТЬ ТОВАР</a></li>
-            <li><a class="btn btn-block btn-secondary" href="#">СПИСОК ТОВАРА</a></li>
-            <li><a class="btn btn-block btn-secondary" href="#">ВХОД ВЫХОД</a></li>
+            <li><a class="btn btn-block btn-secondary" style="height: 100%;" href="#">ДОБАВИТЬ ТОВАР</a></li>
+            <li><a class="btn btn-block btn-secondary" style="height: 100%;" href="#">УДАЛИТЬ ТОВАР</a></li>
+            <li><a class="btn btn-block btn-secondary" style="height: 100%;" href="#">СПИСОК ТОВАРА</a></li>
+            <li><a class="btn btn-block btn-secondary" style="height: 100%;" href="#">ВХОД ВЫХОД</a></li>
+            <li>
+                @await Component.InvokeAsync("CartSummary")
+            </li>
+
         </ul>
     </header>
     <main>

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SportsStore.WebService.Database;
+using SportsStore.WebService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,12 @@ public class Startup
 		services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
 			_configuration["Data:SportsStoreProducts:ConnectionString"]));
 		services.AddTransient<IProductRepository, EFProductRepository>();
+		services.AddTransient<IOrderRepository, OrderRepository>();
 		services.AddMvc(options => options.EnableEndpointRouting = false);
 		services.AddMemoryCache();
 		services.AddSession();
+		services.AddScoped(sp => SessionCart.GetCart(sp));
+		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 	}
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
