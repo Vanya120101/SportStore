@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,12 @@ public class Startup
 		services.AddSession();
 		services.AddScoped(sp => SessionCart.GetCart(sp));
 		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+		services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(_configuration
+			["Data:SportStoreIdentity:ConnectionString"]));
+
+		services.AddIdentity<IdentityUser, IdentityRole>()
+			.AddEntityFrameworkStores<AppIdentityDbContext>()
+			.AddDefaultTokenProviders();
 	}
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,6 +52,7 @@ public class Startup
 		app.UseSession();
 		app.UseStatusCodePages();
 		app.UseStaticFiles();
+		app.UseAuthentication();
 		app.UseMvc(routes =>
 		{
 			routes.MapRoute(
@@ -73,5 +81,6 @@ public class Startup
 		});
 
 		SeedData.EnsurePopulated(app);
+		IdentitySeedData.EnsurePopulated(app);
 	}
 }

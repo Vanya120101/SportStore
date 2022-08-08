@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportsStore.WebService.Database;
 using SportsStore.WebService.Models;
 using System;
 using System.Linq;
-//TODO: включить валидацию данных на стороне клиента. Страница 323.
+//TODO: включить валидацию данных на стороне клиента. Страница 323. Разобраться с библиотеками фронтэнда. 
 
 namespace SportsStore.WebService.Controllers;
+
+[Authorize]
 public class AdminController : Controller
 {
 	private readonly IProductRepository _productRepository;

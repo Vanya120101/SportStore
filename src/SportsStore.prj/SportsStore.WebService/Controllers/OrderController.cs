@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportsStore.WebService.Database;
 using SportsStore.WebService.Models;
 using System.Linq;
@@ -34,12 +35,14 @@ public class OrderController : Controller
 		return RedirectToAction(nameof(Completed));
 	}
 
+	[Authorize]
 	public ViewResult List()
 	{
 		var orders = _orderRepository.Orders.Where(o => o.Shipped == false);
 		return View(orders);
 	}
 
+	[Authorize]
 	[HttpPost]
 	public IActionResult MarkShipped(int orderId)
 	{
